@@ -1,0 +1,291 @@
+﻿@using WebBanHangOnline.Common
+<!DOCTYPE html>
+<html>
+<head>
+    <title>@ViewBag.Title</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="Colo Shop Template">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="~/Content/assets/styles/bootstrap4/bootstrap.min.css">
+    <link href="~/Content/assets/plugins/font-awesome-4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" type="text/css" href="~/Content/assets/plugins/OwlCarousel2-2.2.1/owl.carousel.css">
+    <link rel="stylesheet" type="text/css" href="~/Content/assets/plugins/OwlCarousel2-2.2.1/owl.theme.default.css">
+    <link rel="stylesheet" type="text/css" href="~/Content/assets/plugins/OwlCarousel2-2.2.1/animate.css">
+    <link rel="stylesheet" type="text/css" href="~/Content/assets/plugins/jquery-ui-1.12.1.custom/jquery-ui.css">
+    <meta name="description" content="@ViewBag.SeoDescription" />
+    <meta name="keywords" itemprop="keywords" content="@ViewBag.SeoKeyWord" />
+    <link rel="canonical" href="https://www.ten_mien_cua_cac_ban/" />
+    <meta name="robots" content="index,follow,noodp" />
+    <meta name="robots" content="noarchive">
+    <meta property="og:site_name" content="Bán hàng online" />
+    <meta property="og:type" content="Website" />
+    <meta property="og:locale" content="vi_VN" />
+    <meta property="og:title" itemprop="name" content="@ViewBag.Title" />
+    <meta property="og:url" itemprop="url" content="https://www.ten_mien_cua_cac_ban/" />
+    <meta property="og:description" content="@ViewBag.SeoDescription" />
+    <meta content="https://cdn.24h.com.vn/upload/2-2018/images/2018-06-14/logo-chan-trang-24h.png" property="og:image" itemprop="thumbnailUrl" />
+    <!--script_breadcrum-->
+    <link rel="stylesheet" type="text/css" href="~/Content/assets/styles/responsive.css">
+    @Scripts.Render("~/bundles/modernizr")
+    <script src="~/Content/assets/js/jquery-3.2.1.min.js"></script>
+    @Scripts.Render("~/bundles/jqueryval")
+
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@700&display=swap" rel="stylesheet">
+
+
+    <style>
+        /* Thiết lập màu chủ đạo là đen và trắng */
+        body {
+            background-color: #ffffff; /* Màu nền trắng */
+            color: #000000; /* Màu chữ đen */
+        }
+
+        /* Thay đổi màu chữ và nền cho các phần tử cụ thể */
+        .header {
+            background-color: #000000; /* Màu nền đen cho header */
+        }
+
+        .navbar-brand a {
+            color: #000000; /* Màu chữ đen cho logo */
+        }
+
+        .top_nav_left {
+            color: #000000; /* Màu chữ đen cho top navigation */
+        }
+
+        /* CSS cho phần tìm kiếm và giỏ hàng */
+        .search-cart-container {
+            display: flex;
+            align-items: center;
+        }
+
+            .search-cart-container .search-icon,
+            .search-cart-container .cart-icon {
+                margin-right: 10px;
+            }
+
+                .search-cart-container .search-icon a,
+                .search-cart-container .cart-icon a {
+                    color: black;
+                    text-decoration: none;
+                }
+
+        /* CSS cho cửa sổ tìm kiếm */
+        .search-window {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: white;
+            border: 1px solid #ccc;
+            padding: 10px;
+            z-index: 1000;
+        }
+
+            /* CSS để hiển thị cửa sổ khi được kích hoạt */
+            .search-window.active {
+                display: block;
+            }
+
+        /* CSS cho input và button trong form tìm kiếm */
+        .search-form {
+            display: flex;
+            align-items: center;
+        }
+
+        .search-input {
+            width: 200px;
+            padding: 5px;
+            margin-right: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .search-button {
+            padding: 5px 10px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+            .search-button:hover {
+                background-color: #0056b3;
+            }
+
+
+    </style>
+</head>
+<body>
+    <div class="super_container">
+
+        <!-- Header -->
+        <header class="header trans_300">
+            <!-- Top Navigation -->
+            <div class="top_nav">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="top_nav_left">Hotline: 0362599445, 127 Nguyễn Minh Hoàng, Phường 12, Quận tân Bình @SettingHelper.GetValue("SettingHotline")</div>
+                        </div>
+                        <div class="col-md-6 text-right">
+                            <div class="top_nav_right">
+                                <ul class="top_nav_menu">
+                                    <li class="account">
+                                        @if (!Request.IsAuthenticated)
+                                        {
+                                            <a href="#">
+                                                My Account
+                                                <i class="fa fa-angle-down"></i>
+                                            </a>
+                                            <ul class="account_selection">
+                                                <li><a href="/account/login"><i class="fa fa-sign-in" aria-hidden="true"></i>Sign In</a></li>
+                                                <li><a href="/account/Register"><i class="fa fa-user-plus" aria-hidden="true"></i>Register</a></li>
+                                            </ul>
+                                        }
+                                        else
+                                        {
+                                            <a href="#">
+                                                Welcome: @User.Identity.Name
+                                                <i class="fa fa-angle-down"></i>
+                                            </a>
+                                            <ul class="account_selection">
+                                                <li><a href="/"><i class="fa fa-sign-in" aria-hidden="true"></i>Profile</a></li>
+                                                <li><a href="javascript:document.getElementById('logOffForm').submit()"><i class="fa fa-user-plus" aria-hidden="true"></i> Logout</a></li>
+                                            </ul>
+                                        }
+                                    </li>
+                                </ul>
+                                @if (Request.IsAuthenticated)
+                                {
+                                    <div style="display:none">
+                                        @using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { @id = "logOffForm" }))
+                                        {
+                                            @Html.AntiForgeryToken()
+                                        }
+                                    </div>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="main-nav-container">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-4 text-center">
+                            <!-- Phần đầu: Menu top ở giữa -->
+                            <nav class="navbar navbar-expand-lg navbar-light justify-content-center">
+                                <div class="container-fluid">
+                                    <div class="collapse navbar-collapse" id="navbarNavDropdown">
+                                        <ul class="navbar-nav mr-auto order-1">
+                                            <li class="nav-item dropdown">
+                                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                    <span class="menu-icon">&#9776;</span> <!-- Biểu tượng menu Unicode -->
+                                                </a>
+                                                <div class="dropdown-menu dropdown-menu-left" aria-labelledby="navbarDropdownMenuLink">
+                                                    <!-- Menu items -->
+                                                    @Html.Action("MenuTop", "Menu")
+                                                </div>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </nav>
+                        </div>
+                        <div class="col-lg-4 text-center">
+                            <div class="navbar-brand mx-auto" style="display: flex; justify-content: center; align-items: center; height: 100%;">
+                                <a href="/" style="margin: 0; color: black; font-size: 40px; font-weight: 700; font-family: 'Roboto', sans-serif;">Hugme</a>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 text-center" style="margin-top: auto; margin-bottom: auto;">
+                            <!-- Phần cuối: Biểu tượng tìm kiếm và giỏ hàng -->
+                            <div class="search-cart-container d-flex justify-content-center align-items-center">
+                                <!-- Biểu tượng tìm kiếm -->
+                                <div class="search-icon">
+                                    <a href="#" onclick="toggleSearch()">
+                                        <i class="fa fa-search" aria-hidden="true"></i>
+                                    </a>
+                                </div>
+                                <!-- Biểu tượng giỏ hàng -->
+                                <div class="cart-icon">
+                                    <a href="/gio-hang">
+                                        <!-- Đặt đường dẫn đến trang giỏ hàng -->
+                                        <i class="fa fa-shopping-cart" aria-hidden="true"></i>
+                                        <!-- Số lượng sản phẩm trong giỏ hàng -->
+                                        <span class="cart-count">0</span>
+                                    </a>
+                                </div>
+                            </div>
+                            <!-- Cửa sổ tìm kiếm -->
+                            <div id="search-window" class="search-window">
+                                <form class="search-form" action="/search" method="get">
+                                    <input type="text" class="search-input" placeholder="Search" name="q">
+                                    <button type="submit" class="search-button">Search</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        @RenderBody()
+        <!-- Newsletter -->
+        <!-- Footer -->
+        <footer class="footer">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-6">
+                        <div class="footer_nav_container d-flex flex-sm-row flex-column align-items-center justify-content-lg-start justify-content-center text-center">
+                            <ul class="footer_nav">
+                                <li><a href="#">Bài viết</a></li>
+                                <li><a href="#">FAQs</a></li>
+                                <li><a href="contact.html">Liên hệ với chúng tôi</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="footer_social d-flex flex-row align-items-center justify-content-lg-end justify-content-center">
+                            <ul>
+                                <li><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
+                                <li><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
+                                <li><a href="#"><i class="fa fa-instagram" aria-hidden="true"></i></a></li>
+                                <li><a href="#"><i class="fa fa-skype" aria-hidden="true"></i></a></li>
+                                <li><a href="#"><i class="fa fa-pinterest" aria-hidden="true"></i></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="footer_nav_container">
+                            <div class="cr">2024 by an chan<i class="fa fa-heart-o" aria-hidden="true"></i></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </div>
+    <script src="~/Content/assets/styles/bootstrap4/popper.js"></script>
+    <script src="~/Content/assets/styles/bootstrap4/bootstrap.min.js"></script>
+    <script src="~/Content/assets/plugins/Isotope/isotope.pkgd.min.js"></script>
+    <script src="~/Content/assets/plugins/OwlCarousel2-2.2.1/owl.carousel.js"></script>
+    <script src="~/Content/assets/plugins/easing/easing.js"></script>
+    <script src="~/Content/assets/plugins/jquery-ui-1.12.1.custom/jquery-ui.js"></script>
+    <script src="~/Content/assets/js/custom.js"></script>
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+    <script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
+    <script src="~/Scripts/jsShopping.js"></script>
+    <script>
+        function toggleSearch() {
+            var searchWindow = document.getElementById('search-window');
+            searchWindow.classList.toggle('active');
+        }
+    </script>
+</body>
+</html>

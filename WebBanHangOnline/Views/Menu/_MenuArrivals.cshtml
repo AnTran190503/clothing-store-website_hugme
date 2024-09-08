@@ -1,0 +1,148 @@
+﻿@model IEnumerable<WebBanHangOnline.Models.EF.ProductCategory>
+
+<head>
+    <style>
+        /* Áp dụng kiểu cho phần tử danh sách */
+        .arrivals_grid_sorting .grid_sorting_button {
+            color: #000000; /* Màu chữ đen */
+        }
+
+            /* Áp dụng kiểu cho phần tử danh sách được chọn */
+            .arrivals_grid_sorting .grid_sorting_button.active {
+                color: #ffffff; /* Màu chữ trắng */
+                background-color: #000000; /* Màu nền đen */
+            }
+
+            /* Áp dụng kiểu cho phần tử danh sách khi di chuột qua */
+            .arrivals_grid_sorting .grid_sorting_button:hover {
+                color: #ffffff; /* Màu chữ trắng */
+                background-color: #000000; /* Màu nền đen */
+            }
+
+        .product_price {
+            color: #000000; /* Đặt màu chữ đen cho giá sản phẩm */
+        }
+
+        /* Áp dụng kiểu cho nút "add to cart" */
+        .red_button a {
+            color: #ffffff; /* Đặt màu chữ trắng cho nút "add to cart" */
+            background-color: #000000; /* Đặt màu nền đen cho nút "add to cart" */
+        }
+
+        /* Định nghĩa kích thước cho cột tùy chỉnh */
+        .custom-col {
+            width: 1200px; /* Đặt chiều rộng của cột là 100% */
+            /* Nếu bạn muốn thay đổi kích thước theo đơn vị px hoặc % khác, chỉ cần thay đổi giá trị tại đây */
+        }
+
+        /* Áp dụng kiểu cho hình ảnh sản phẩm */
+        .product_image img {
+            width: 120%; /* Đặt chiều rộng của hình ảnh là 100% của phần tử chứa nó */
+            height: auto; /* Cho phép chiều cao tự động điều chỉnh dựa trên tỷ lệ khung hình */
+        }
+    </style>
+</head>
+
+
+@if (Model != null && Model.Any())
+{
+    <div class="row">
+        <div class="col text-center">
+            <div class="section_title new_arrivals_title">
+                <h2>Sản Phẩm</h2>
+            </div>
+        </div>
+    </div>
+    <div class="row align-items-center">
+        <div class="col text-center">
+            <div class="new_arrivals_sorting">
+                <ul class="arrivals_grid_sorting clearfix button-group filters-button-group">
+                    <li class="grid_sorting_button button d-flex flex-column justify-content-center align-items-center active is-checked" data-filter="*">all</li>
+                    @foreach (var item in Model)
+                    {
+                        <li class="grid_sorting_button button d-flex flex-column justify-content-center align-items-center" data-filter=".@item.Alias">@item.Title</li>
+                    }
+
+                    @*<li class="grid_sorting_button button d-flex flex-column justify-content-center align-items-center" data-filter=".women">women's</li>
+                        <li class="grid_sorting_button button d-flex flex-column justify-content-center align-items-center" data-filter=".accessories">accessories</li>
+                        <li class="grid_sorting_button button d-flex flex-column justify-content-center align-items-center" data-filter=".men">men's</li>*@
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="col custom-col">
+        <div class="product-grid" data-isotope="{ &quot;itemSelector&quot;: &quot;.product-item&quot;, &quot;layoutMode&quot;: &quot;fitRows&quot; }" style="position: relative; height: 450px;">
+            <!-- Product 1 -->
+            <div class="product-item ao-thun" style="position: absolute; left: 0px; top: 0px;">
+                <div class="product discount product_filter" style="border-right: 1px solid rgb(233, 233, 233);">
+                    <div class="product_image">
+                        <img src="/Uploads/files/HM2.jpg" alt="Áo thun đỏ">
+                    </div>
+                    <div class="favorite favorite_left"></div>
+                    <div class="product_info">
+                        <h6 class="product_name"><a href="/chi-tiet/ao-thun-do-p7">Áo thun đỏ</a></h6>
+                        <div class="product_price">150,000</div>
+                    </div>
+                </div>
+                <div class="red_button add_to_cart_button"><a href="#" class="btnAddToCart" data-id="7">add to cart</a></div>
+            </div>
+            <!-- Product 1 -->
+            <div class="product-item ao-thun" style="position: absolute; left: 222px; top: 0px;">
+                <div class="product discount product_filter" style="border-right: 1px solid rgb(233, 233, 233);">
+                    <div class="product_image">
+                        <img src="/Uploads/files/HM3.jpg" alt="Áo thun đen">
+                    </div>
+                    <div class="favorite favorite_left"></div>
+                    <div class="product_info">
+                        <h6 class="product_name"><a href="/chi-tiet/ao-thun-p8">Áo thun đen</a></h6>
+                        <div class="product_price">180,000</div>
+                    </div>
+                </div>
+                <div class="red_button add_to_cart_button"><a href="#" class="btnAddToCart" data-id="8">add to cart</a></div>
+            </div>
+            <!-- Product 1 -->
+            <div class="product-item babytee" style="position: absolute; left: 444px; top: 0px;">
+                <div class="product discount product_filter" style="border-right: 1px solid rgb(233, 233, 233);">
+                    <div class="product_image">
+                        <img src="/Uploads/files/HM4.jpg" alt="babytee đen phối trắng">
+                    </div>
+                    <div class="favorite favorite_left"></div>
+                    <div class="product_info">
+                        <h6 class="product_name"><a href="/chi-tiet/babytee-p9">babytee đen phối trắng</a></h6>
+                        <div class="product_price">150,000</div>
+                    </div>
+                </div>
+                <div class="red_button add_to_cart_button"><a href="#" class="btnAddToCart" data-id="9">add to cart</a></div>
+            </div>
+            <!-- Product 1 -->
+            <div class="product-item ao-thun" style="position: absolute; left: 666px; top: 0px;">
+                <div class="product discount product_filter" style="border-right: 1px solid rgb(233, 233, 233);">
+                    <div class="product_image">
+                        <img src="/Uploads/files/HM2.jpg" alt="áo thun">
+                    </div>
+                    <div class="favorite favorite_left"></div>
+                    <div class="product_info">
+                        <h6 class="product_name"><a href="/chi-tiet/ao-thun-p10">áo thun</a></h6>
+                        <div class="product_price">1,111</div>
+                    </div>
+                </div>
+                <div class="red_button add_to_cart_button"><a href="#" class="btnAddToCart" data-id="10">add to cart</a></div>
+            </div>
+            <!-- Product 1 -->
+            <div class="product-item ao-thun" style="position: absolute; left: 888px; top: 0px;">
+                <div class="product discount product_filter" style="border-right: none;">
+                    <div class="product_image">
+                        <img src="/Uploads/files/HM4.jpg" alt="ÁO thun">
+                    </div>
+                    <div class="favorite favorite_left"></div>
+                    <div class="product_info">
+                        <h6 class="product_name"><a href="/chi-tiet/ao-thun-p11">ÁO thun</a></h6>
+                        <div class="product_price">167,698,790</div>
+                    </div>
+                </div>
+                <div class="red_button add_to_cart_button"><a href="#" class="btnAddToCart" data-id="11">add to cart</a></div>
+            </div>
+
+        </div>
+    </div>
+}
